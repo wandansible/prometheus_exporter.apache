@@ -1,0 +1,8 @@
+---
+apache_exporter_port: 9117
+apache_exporter_flags: "{{ lookup('template', 'flags') }}"
+apache_exporter_extra_flags: {}
+apache_exporter_listen: localhost:{{ apache_exporter_port }}
+apache_exporter_log_level: warn
+apache_exporter_scrape_uri: http://localhost/server-status?auto
+apache_exporter_git_org: Lusitaniae

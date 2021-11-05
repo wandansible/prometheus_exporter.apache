@@ -1,0 +1,7 @@
+---
+- name: Apply base prometheus exporter role
+  ansible.builtin.include_role:
+    name: prometheus_exporter
+    public: true
+  vars:
+    exporter_name: apache_exporter

@@ -1,0 +1,179 @@
+---
+argument_specs:
+  main:
+    short_description: Install and configure Apache Exporter for Prometheus
+    options:
+      apache_exporter_extra_flags:
+        description: Extra flags to run exporter with
+        type: dict
+
+      apache_exporter_listen:
+        description: Listen address and port
+        type: str
+        default: localhost:9117
+
+      apache_exporter_log_level:
+        description: Only log messages with the given severity or above
+        type: str
+        default: warn
+        choices:
+          - debug
+          - info
+          - warn
+          - error
+
+      apache_exporter_scrape_uri:
+        description: |
+          URI for the apache server status page,
+          see https://httpd.apache.org/docs/2.4/mod/mod_status.html
+        default: http://localhost/server-status?auto
+
+      apache_exporter_port:
+        description: Listen port
+        type: int
+        default: 9117
+
+      apache_exporter_file_sd_dir:
+        description: Directory, on scrape servers, for the file service discovery target
+        type: str
+        default: /etc/prometheus/file_sd/apache_exporter
+
+      apache_exporter_scrape_servers:
+        description: |
+          List of servers that scrape exporter metrics from the host,
+          overrides prometheus_scrape_servers
+        type: list
+        elements: str
+
+      apache_exporter_labels:
+        description: |
+          Labels added to exporter metrics,
+          overrides prometheus_labels
+        type: dict
+
+      apache_exporter_install:
+        description: If true, install exporter
+        type: bool
+        default: true
+
+      apache_exporter_configure_caddy:
+        description: If true, configure caddy to add a TLS endpoint for the exporter
+        type: bool
+        default: true
+
+      apache_exporter_register:
+        description: If true, register the exporter with the scrape servers
+        type: bool
+        default: true
+
+      apache_exporter_user:
+        description: Name of the exporter unix user
+        type: str
+
+      apache_exporter_group:
+        description: Name of the exporter unix group
+        type: str
+
+      apache_exporter_groups:
+        description: Unix groups added to exporter unix user
+        type: list
+        elements: str
+
+      apache_exporter_manage_user:
+        description: If true, add exporter unix user and group
+        type: bool
+        default: true
+
+      apache_exporter_bin_dir:
+        description: Directory for the exporter executable
+        type: str
+
+      apache_exporter_src_dir:
+        description: Directory for the exporter downloads
+        type: str
+
+      apache_exporter_add_extract_dir:
+        description: If true, add an extraction directory for the exporter package
+        type: bool
+        default: false
+
+      apache_exporter_git_org:
+        description: Name of organisation for exporter git repository
+        type: str
+
+      apache_exporter_git_repo:
+        description: Name of exporter git repository
+        type: str
+
+      apache_exporter_latest_url:
+        description: URL for the latest version
+        type: str
+
+      apache_exporter_version:
+        description: Version to install (use "latest" for the latest version)
+        type: str
+        default: latest
+
+      apache_exporter_version_regex:
+        description: Regular expression for capturing the version from the latest tag
+        type: str
+
+      apache_exporter_tag:
+        description: Version git tag
+        type: str
+
+      apache_exporter_package_name:
+        description: Name of the exporter package
+        type: str
+
+      apache_exporter_package:
+        description: Filename of the exporter package (without extension)
+        type: str
+
+      apache_exporter_arch_map:
+        description: Mapping of the possible values of ansible_architecture to the exporter package architectures
+        type: dict
+
+      apache_exporter_package_url:
+        description: URL for the exporter package
+        type: str
+
+      apache_exporter_package_dir:
+        description: Directory the exporter package is extracted to
+        type: str
+
+      apache_exporter_binary:
+        description: Filename for the exporter executable
+        type: str
+
+      apache_exporter_checksums_url:
+        description: URL for the exporter package checksums
+        type: str
+
+      apache_exporter_checksums_file:
+        description: Filename for the exporter package checksums
+        type: str
+
+      apache_exporter_checksum_type:
+        description: The exporter package checksum type
+        type: str
+
+      apache_exporter_checksum:
+        description: The exporter package checksum
+        type: str
+
+      apache_exporter_service:
+        description: Name of the exporter systemd service
+        type: str
+
+      apache_exporter_description:
+        description: Description for the exporter systemd service
+        type: str
+
+      apache_exporter_flags:
+        description: Contents or list of flags to run exporter with
+        type: raw
+
+      apache_exporter_target:
+        description: Scrape target hostname and port
+        type: str

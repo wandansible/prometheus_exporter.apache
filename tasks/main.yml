@@ -1,5 +1,4 @@
 ---
 - name: Apply base prometheus exporter role
-  ansible.builtin.include_role:
+  ansible.builtin.import_role:
     name: prometheus_exporter
-    public: true

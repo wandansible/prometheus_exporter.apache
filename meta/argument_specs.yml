@@ -59,12 +59,12 @@ argument_specs:
       apache_exporter_configure_caddy:
         description: If true, configure caddy to add a TLS endpoint for the exporter
         type: bool
-        default: true
+        default: false
 
       apache_exporter_register:
         description: If true, register the exporter with the scrape servers
         type: bool
-        default: true
+        default: false
 
       apache_exporter_user:
         description: Name of the exporter unix user
@@ -89,13 +89,18 @@ argument_specs:
         type: str
 
       apache_exporter_src_dir:
-        description: Directory for the exporter downloads
+        description: Directory for the downloaded exporter src archive
         type: str
 
-      apache_exporter_add_extract_dir:
-        description: If true, add an extraction directory for the exporter package
+      node_exporter_strip_components:
+        description: Strip NUMBER leading components from file names on extraction
+        type: int
+        default: 1
+
+      node_exporter_clean_src_dir:
+        description: Remove old downloaded archive files from exporter src directory
         type: bool
-        default: false
+        default: true
 
       apache_exporter_git_org:
         description: Name of organisation for exporter git repository
@@ -105,8 +110,8 @@ argument_specs:
         description: Name of exporter git repository
         type: str
 
-      apache_exporter_latest_url:
-        description: URL for the latest version
+      node_exporter_archive_url:
+        description: Override the URL for the exporter archive file
         type: str
 
       apache_exporter_version:
@@ -114,43 +119,21 @@ argument_specs:
         type: str
         default: latest
 
-      apache_exporter_version_regex:
-        description: Regular expression for capturing the version from the latest tag
-        type: str
-
-      apache_exporter_tag:
-        description: Version git tag
-        type: str
-
-      apache_exporter_package_name:
-        description: Name of the exporter package
-        type: str
-
-      apache_exporter_package:
-        description: Filename of the exporter package (without extension)
-        type: str
-
       apache_exporter_arch_map:
-        description: Mapping of the possible values of ansible_architecture to the exporter package architectures
+        description: |
+          Mapping of the possible values of ansible_architecture
+          to the exporter package architectures
         type: dict
-
-      apache_exporter_package_url:
-        description: URL for the exporter package
-        type: str
-
-      apache_exporter_package_dir:
-        description: Directory the exporter package is extracted to
-        type: str
 
       apache_exporter_binary:
         description: Filename for the exporter executable
         type: str
 
-      apache_exporter_checksums_url:
-        description: URL for the exporter package checksums
+      apache_exporter_checksum_url:
+        description: Override the URL for the exporter checksum file
         type: str
 
-      apache_exporter_checksums_file:
+      apache_exporter_checksum_file:
         description: Filename for the exporter package checksums
         type: str
 

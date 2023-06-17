@@ -5,4 +5,4 @@ apache_exporter_extra_flags: {}
 apache_exporter_listen: localhost:{{ apache_exporter_port }}
 apache_exporter_log_level: warn
 apache_exporter_scrape_uri: http://localhost/server-status?auto
-apache_exporter_git_org: Lusitaniae
+apache_exporter_github_org: Lusitaniae

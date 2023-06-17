@@ -16,16 +16,18 @@ ENTRY POINT: main - Install and configure Apache Exporter for Prometheus
 
 OPTIONS (= is mandatory):
 
-- apache_exporter_add_extract_dir
-        If true, add an extraction directory for the exporter package
-        default: false
-        type: bool
-
 - apache_exporter_arch_map
         Mapping of the possible values of ansible_architecture to the
         exporter package architectures
         default: null
         type: dict
+
+- apache_exporter_archive_urls
+        Override the list of exporter archive urls for different
+        platforms and architectures
+        default: null
+        elements: str
+        type: list
 
 - apache_exporter_bin_dir
         Directory for the exporter executable
@@ -37,30 +39,31 @@ OPTIONS (= is mandatory):
         default: null
         type: str
 
-- apache_exporter_checksum
-        The exporter package checksum
-        default: null
-        type: str
-
 - apache_exporter_checksum_type
         The exporter package checksum type
         default: null
         type: str
 
-- apache_exporter_checksums_file
-        Filename for the exporter package checksums
+- apache_exporter_checksum_url
+        Override the URL for the exporter checksum file
         default: null
         type: str
 
-- apache_exporter_checksums_url
-        URL for the exporter package checksums
+- apache_exporter_checksums
+        Override exporter archive checksums file contents
         default: null
         type: str
+
+- apache_exporter_clean_src_dir
+        Remove old downloaded archive files from exporter src
+        directory
+        default: true
+        type: bool
 
 - apache_exporter_configure_caddy
         If true, configure caddy to add a TLS endpoint for the
         exporter
-        default: true
+        default: false
         type: bool
 
 - apache_exporter_description
@@ -84,13 +87,18 @@ OPTIONS (= is mandatory):
         default: null
         type: raw
 
-- apache_exporter_git_org
-        Name of organisation for exporter git repository
+- apache_exporter_github_checksum_filename
+        Filename for the exporter package checksums file on github
         default: null
         type: str
 
-- apache_exporter_git_repo
-        Name of exporter git repository
+- apache_exporter_github_org
+        Name of organisation for exporter github repository
+        default: Lusitaniae
+        type: str
+
+- apache_exporter_github_repo
+        Name of exporter github repository
         default: null
         type: str
 
@@ -105,6 +113,11 @@ OPTIONS (= is mandatory):
         elements: str
         type: list
 
+- apache_exporter_handler
+        Name of the exporter handler to notify
+        default: null
+        type: str
+
 - apache_exporter_install
         If true, install exporter
         default: true
@@ -114,11 +127,6 @@ OPTIONS (= is mandatory):
         Labels added to exporter metrics, overrides prometheus_labels
         default: null
         type: dict
-
-- apache_exporter_latest_url
-        URL for the latest version
-        default: null
-        type: str
 
 - apache_exporter_listen
         Listen address and port
@@ -136,26 +144,6 @@ OPTIONS (= is mandatory):
         default: true
         type: bool
 
-- apache_exporter_package
-        Filename of the exporter package (without extension)
-        default: null
-        type: str
-
-- apache_exporter_package_dir
-        Directory the exporter package is extracted to
-        default: null
-        type: str
-
-- apache_exporter_package_name
-        Name of the exporter package
-        default: null
-        type: str
-
-- apache_exporter_package_url
-        URL for the exporter package
-        default: null
-        type: str
-
 - apache_exporter_port
         Listen port
         default: 9117
@@ -163,7 +151,7 @@ OPTIONS (= is mandatory):
 
 - apache_exporter_register
         If true, register the exporter with the scrape servers
-        default: true
+        default: false
         type: bool
 
 - apache_exporter_scrape_servers
@@ -184,14 +172,14 @@ OPTIONS (= is mandatory):
         type: str
 
 - apache_exporter_src_dir
-        Directory for the exporter downloads
+        Directory for the downloaded exporter src archive
         default: null
         type: str
 
-- apache_exporter_tag
-        Version git tag
-        default: null
-        type: str
+- apache_exporter_strip_components
+        Strip NUMBER leading components from file names on extraction
+        default: 1
+        type: int
 
 - apache_exporter_target
         Scrape target hostname and port
@@ -206,12 +194,6 @@ OPTIONS (= is mandatory):
 - apache_exporter_version
         Version to install (use "latest" for the latest version)
         default: latest
-        type: str
-
-- apache_exporter_version_regex
-        Regular expression for capturing the version from the latest
-        tag
-        default: null
         type: str
 ```
 

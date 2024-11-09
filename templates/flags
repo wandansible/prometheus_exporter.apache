@@ -1,11 +1,11 @@
 #jinja2: trim_blocks: "false", lstrip_blocks: "true"
-{% for k,v in apache_exporter_extra_flags | dictsort %}
+{% for k, v in apache_exporter_extra_flags | dictsort %}
   {% if v == "" %}
---{{ k }} \
+--{{ k }}
   {% else %}
---{{ k }}={{ v | quote }} \
+--{{ k }}="{{ v }}"
   {% endif %}
 {% endfor %}
---scrape_uri="{{ apache_exporter_scrape_uri }}" \
---log.level="{{ apache_exporter_log_level }}" \
+--scrape_uri="{{ apache_exporter_scrape_uri }}"
+--log.level="{{ apache_exporter_log_level }}"
 --telemetry.address="{{ apache_exporter_listen }}"

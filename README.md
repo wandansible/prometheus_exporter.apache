@@ -67,7 +67,7 @@ Options (= indicates it is required):
           default: /etc/prometheus/file_sd/apache_exporter
           type: str
 
-- apache_exporter_flags  Contents or list of flags to run exporter with
+- apache_exporter_flags  List of flags to run exporter with, as string or list
           default: null
           type: raw
 
@@ -136,6 +136,10 @@ Options (= indicates it is required):
           default: http://localhost/server-status?auto
 
 - apache_exporter_service  Name of the exporter systemd service
+          default: null
+          type: str
+
+- apache_exporter_service_unit_file  Contents of the systemd unit file for the exporter
           default: null
           type: str
 
